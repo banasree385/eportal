@@ -1,0 +1,50 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.sg.eportal.mapper.EmployeeMapper">
+
+
+	  <!-- <resultMap id="ProductResultMap" type="PressRelease" >
+		<result column="ID" property="id" jdbcType="NUMERIC" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="CODE" property="code" jdbcType="VARCHAR" />
+		<result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />		
+		<result column="RELEASEdate" property="releaseDate" jdbcType="DATE" />
+		<result column="PRICE" property="price" jdbcType="NUMERIC" />
+		<result column="STAR_RATING" property="starRating" jdbcType="NUMERIC" />
+		<result column="IMAGE_URL" property="imageUrl" jdbcType="VARCHAR" />
+	  </resultMap> -->
+	  
+
+<select id="getEmployees"  resultType ="com.sg.eportal.model.Employee" >
+
+		select
+		EMPLOYEE_ID        employeeId,
+        FIRST_NAME       firstName,
+        LAST_NAME       lastName,
+        DEPARTMENT  department,
+        GENDER  gender,
+        DOB          dob           
+	   from sys.EMPLOYEE
+	 
+</select>
+
+<insert id="saveEmployee" parameterType="com.sg.eportal.model.Employee">			
+	INSERT INTO sys.EMPLOYEE
+		(EMPLOYEE_ID, FIRST_NAME,LAST_NAME,DEPARTMENT,GENDER,DOB) 
+	VALUES
+		(null,
+		 #{firstName,jdbcType=VARCHAR},
+	     #{lastName,jdbcType=VARCHAR},
+	     #{department,jdbcType=VARCHAR},
+	     #{gender,jdbcType=VARCHAR},
+	     #{dob,jdbcType=DATE}
+	     )
+</insert>
+
+
+
+
+ 
+</mapper>
