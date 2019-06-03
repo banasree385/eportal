@@ -30,7 +30,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public boolean saveEmployee(Employee employee) throws ParseException {
 		// TODO Auto-generated method stub
-		String startDate="12-31-2014";
 		SimpleDateFormat sdf1 = new SimpleDateFormat("dd.MM.yyyy");
 		Date date = sdf1.parse(employee.getDobFormatted());
 		employee.setDob(new java.sql.Date(date.getTime()));

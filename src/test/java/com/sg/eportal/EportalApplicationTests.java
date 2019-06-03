@@ -22,8 +22,8 @@ import com.sg.eportal.controller.EmployeeController;
 public class EportalApplicationTests {
 	 @Autowired
 	    private EmployeeController controller;
-
-	/*@Test
+/*
+	@Test
 	public void contextLoads() throws Exception{
 		assertThat(controller).isNotNull();
 	}*/

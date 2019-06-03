@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.sg.eportal.response.FaultResponse;
 import com.sg.eportal.response.Response;
 
@@ -37,23 +38,7 @@ public class AbstractController {
 			throw new IllegalArgumentException(errorMessages.toString());
 		}
 	}
-	/**
-	 * Creates and and returns 400 fault response for binding errors
-	 * 
-	 * @param e
-	 * @return fault response
-	 */
-	@ExceptionHandler(IllegalArgumentException.class)
-	@ResponseBody
-	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
-	public Response handleIllegalArgumentException(Exception e) {
-
-		FaultResponse faultResponse = new FaultResponse();
-		faultResponse.setFaultDescription(e.getMessage());		
-		faultResponse.setCode(HttpStatus.BAD_REQUEST.toString());
-		faultResponse.setMessage(HttpStatus.BAD_REQUEST.getReasonPhrase());
-		return faultResponse;
-	}
+	
 
 	/**
 	 * Creates and returns 500 fault response for other exceptions
@@ -72,6 +57,26 @@ public class AbstractController {
 		faultResponse.setMessage(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
 		return faultResponse;
 	}
+	/**
+	 * Creates and and returns 400 fault response for binding errors
+	 * 
+	 * @param e
+	 * @return fault response
+	 */
+	@ExceptionHandler({IllegalArgumentException.class,JsonParseException.class})
+	@ResponseBody
+	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+	public Response handleIllegalArgumentException(Exception e) {
+
+		FaultResponse faultResponse = new FaultResponse();
+		faultResponse.setFaultDescription(e.getMessage());		
+		faultResponse.setCode(HttpStatus.BAD_REQUEST.toString());
+		faultResponse.setMessage(HttpStatus.BAD_REQUEST.getReasonPhrase());
+		return faultResponse;
+	}
+	
+
+
 	
 	/**
 	 * Use 200 Response to a successful GET, PUT, PATCH or DELETE. Can also be used for a POST that doesn't result in a creation.

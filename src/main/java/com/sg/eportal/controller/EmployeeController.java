@@ -37,8 +37,11 @@ public class EmployeeController extends AbstractController{
 	{
 		Response response=new Response();
 		boolean status =employeeService.saveEmployee(employee);
-		response.setSuccess(status);      
-		return setAndReturnSuccessResponse(response);
+		response.setSuccess(status); 
+		String statusCode ="201";
+		String message="Employee record saved successfully";
+		
+		return setAndReturnResponse(response,statusCode,message,status);
 	}
 
 }
